@@ -3,10 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.0">
     <title>Bill the miner</title>
+    <style>
+        html, body {
+            overflow: hidden;
+            padding: 0%;
+        }
+    </style>
 </head>
 <body>
-    <script>window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=true")</script>
+    <canvas id="Window-Game" style="border:1px solid #000000;""></canvas>
+    <script>
+        var canvas = document.getElementById("Window-Game");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        var ctx = canvas.getContext("2d");
+
+        var Bill = new Image();
+        Bill.src = "standing-bill-final.png";
+
+        var x = 15;
+        var y = 10;
+
+        setInterval(Main, 1000 / 60);
+
+        function Main() {
+            ctx.clearRect(0, 0, window.innerWidth, window.innerHeight)
+            ctx.drawImage(Bill, x, y)
+            if (y<=500){ y += 1; }
+           
+        }
+
+        function jump() {
+            y -= 20;
+        }
+
+        function left() {
+            x += 5;
+        }
+        function right() {
+            x += -5;
+        }
+        function down() {
+            y += 20;
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key == 'w') {
+                jump();
+                console.log("jump")
+            }
+        })
+        document.addEventListener('keydown', e => {
+            if (e.key == 'd') {
+                left();
+                console.log("left")
+            }
+        })
+        document.addEventListener('keydown', e => {
+            if (e.key == 'a') {
+                right();
+                console.log("right")
+            }
+        })
+        document.addEventListener('keydown', e => {
+            if (e.key == 's') {
+                down();
+                console.log("jump")
+            }
+        })
+    </script>
 </body>
 </html>
