@@ -34,5 +34,3 @@ document.addEventListener('keydown', e => {
         console.log("jump")
     }
 })
-
-//skf
