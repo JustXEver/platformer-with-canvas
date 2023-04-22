@@ -8,7 +8,8 @@
     <style>
         html, body {
             overflow: hidden;
-            padding: 0%;
+            padding: 0% !important;
+            margin: 0%;
         }
     </style>
 </head>
@@ -26,7 +27,7 @@
     platform1.src = "platform.png"; 
 
     function startGame() {
-        myGamePiece = new component(161, 271, "red", 161, 271);
+        myGamePiece = new component(80, 136, "red", 80, 136);
         ground1 = new component(10, 200, "green", 300, 120); 
         platform1 = new component(426, 96, "blue", 426, 96);
         myGameArea.start();
