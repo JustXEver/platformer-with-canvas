@@ -15,23 +15,25 @@
 </head>
 <body onload="startGame()">
     <script>
+    
+    var jumpcount = 0;
     var Bill = new Image();
     Bill.src = "standing-bill-final.png";
     var Billrun = new Image();
     Bill.src = "bill-running-4.png";
+
     var myGamePiece;
-    
-    var ground1
-    
-    var platform1 = new Image();
-    platform1.src = "platform.png"; 
+    var ground1;
+    var platform1;
+
+    var platformimg = new Image();
+    platformimg.src = "platform.png"; 
 
     function startGame() {
-        myGamePiece = new component(80, 136, "red", 80, 136);
-        ground1 = new component(10, 200, "green", 300, 120); 
-        platform1 = new component(426, 96, "blue", 426, 96);
+        myGamePiece = new component(80, 136, "red", 0, 0, 500, (window.innerHeight / 2));
+        ground1 = new component(10, 200, "green", 300, 120);    
+        platform1 = new platform(426, 96, "blue", 500, (window.innerHeight/2));
         myGameArea.start();
-        
     }   
 
     var myGameArea = {
@@ -52,13 +54,14 @@
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }
     }
-
-    function component(width, height, color, x, y, type) {
-        this.type = type;
+ 
+    function component(width, height, color, x, y, platformx, platformy) {
         this.width = width;
         this.height = height;
         this.x = x;
         this.y = y;
+        this.platformx=platformx;
+        this.platformy=platformy;
         this.speedX = 0;
         this.speedY = 0;
         this.gravity = 0.67;
@@ -75,23 +78,38 @@
             this.x += this.speedX;
             this.y += this.speedY + this.gravitySpeed;
             this.hitBottom();
+            this.hitPlatform();
         }
         this.hitBottom = function () {
             var rockbottom = myGameArea.canvas.height - this.height;
             if (this.y > rockbottom) {
-                this.y = rockbottom
+                this.y = rockbottom;
                 this.speedY = 0;
-                 myGamePiece.gravitySpeed = 0;
+                myGamePiece.gravitySpeed = 0;
+                jumpcount=0;
+            }
+        }
+        this.hitPlatform = function () {
+            var rockbottom = this.platformy;
+            if (this.y >= rockbottom - 136 && this.platformx + 426 > this.x && this.platformx > this.x) {
+                this.y = rockbottom - 136;
+                this.speedY = 0;
+                myGamePiece.gravitySpeed = 0;
+                jumpcount = 0;
             }
         }
     }
 
-    function platform(width, height, color, x, y, type) {
+    function platform(width, height, color, x, y) {
+        this.width = width;
+        this.height = height;
+        this.x = x;
+        this.y = y;
         this.update = function () {
             ctx = myGameArea.context;
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
-            ctx.drawImage(platform1, this.x, this.y)
+            ctx.drawImage(platformimg, this.x, this.y)
         }
     }
 
@@ -101,10 +119,13 @@
         myGameArea.clear();
         myGamePiece.newPos();
         myGamePiece.update();
+        platform1.update();
     }
-
+ 
     function moveup() {
-        if (true) {
+        if (jumpcount<=1) {
+            jumpcount+=1;
+         
             myGamePiece.speedY -= 20;
         }
         
@@ -127,38 +148,36 @@
     }
 
 document.addEventListener("keydown",(event)=>{
-    console.log(event)
     if(event.key==="ArrowRight"){moveright();}
-
 })
 
 document.addEventListener("keydown",(event)=>{
-    console.log(event)
+    
     if(event.key==="ArrowLeft"){moveleft();}
 
 })
 
 document.addEventListener("keydown",(event)=>{
-    console.log(event)
+    
     if(event.key==="ArrowDown"){movedown();}
 
 })
 
 document.addEventListener("keydown",(event)=>{
-    console.log(event)
+    
     if(event.key==="ArrowUp"){moveup();}
 
 
 })
 
     document.addEventListener("keyup", (event) => {
-        console.log(event)
+        
         if (event.key === "ArrowRight") { myGamePiece.speedX = 0; }
 
     })
 
     document.addEventListener("keyup", (event) => {
-        console.log(event)
+        
         if (event.key === "ArrowLeft") {
             myGamePiece.speedX = 0;
         }
