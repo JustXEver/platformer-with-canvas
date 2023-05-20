@@ -22,7 +22,7 @@ class platform {
     }
 };
 
-var world = {
+let world = {
             canvas: document.createElement("canvas"),
             start: function () {
                 this.canvas.width = window.innerWidth;
@@ -39,6 +39,7 @@ var world = {
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             },ctx : world.context
         }
+world.start();
 
 while (true) {
     world.ctx.drawImage(player.billimage, player.x, player.y);}
