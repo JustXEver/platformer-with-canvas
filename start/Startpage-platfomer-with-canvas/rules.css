@@ -1,0 +1,12 @@
+@font-face { font-family: arcade; src: url(./ARCADECLASSIC.TTF); font-stretch: 1% 500%;}
+h1{
+    color: white;
+    font-family: arcade;
+    font-weight: 100;
+    font-size: 70px;
+    
+  }
+
+body{
+    background-image: url("startpage-background.png");
+  }

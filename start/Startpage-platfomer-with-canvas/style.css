@@ -1,0 +1,59 @@
+body{
+    background-image: url(./startpage-background.png);
+}
+.button {
+    position:absolute;
+    top: 200px;
+    left: 560px;
+    background-image: url(./Start-button-proto2.png );
+    width: 700px;
+    height: 100px;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+
+  .button2 {
+    position:absolute;
+    top: 400px;
+    left: 560px;
+    background-image: url(./quit-button\ 1.png );
+    width: 700px;
+    height: 100px;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+
+  .button3 {
+    position:absolute;
+    top: 600px;
+    left: 560px;
+    background-image: url(./Rules-button1.png );
+    width: 700px;
+    height: 100px;
+    padding: 16px 32px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+
+  .button:hover{
+    box-shadow: 0 50px 100px 0 rgba(0,0,0,0.24), 0 50px 100px 0 rgba(0,0,0,0.19);
+  }
+
+  .button2:hover{
+    box-shadow: 0 50px 100px 0 rgba(0,0,0,0.24), 0 50px 100px 0 rgba(0,0,0,0.19);
+  }
+
+  .button3:hover{
+    box-shadow: 0 50px 100px 0 rgba(0,0,0,0.24), 0 50px 100px 0 rgba(0,0,0,0.19);
+  }
+
+
+  
