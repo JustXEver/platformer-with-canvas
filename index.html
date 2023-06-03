@@ -13,7 +13,7 @@
         }
     </style>
 </head>
-<body onload="startGame()">
+<body>
         <script>
         
         var jumpcount = 0;
@@ -21,18 +21,35 @@
         Bill.src = "standing-bill-final.png";
         var Billrun = new Image();
         Bill.src = "bill-running-4.png";
+       
 
         var myGamePiece;
         var ground1;
         var platform1;
+        var platform2;
+        var platform3;
+        var platform4;
+        var platform5;
+        var platform6;
+        var door1;
+        
 
         var platformimg = new Image();
         platformimg.src = "platform.png"; 
 
-        function startGame() {
-            this = new component(80, 136, "red", 0, 0, 500, (window.innerHeight / 2));
+        var doorimg = new Image();
+        doorimg.src = "door-end.png"; 
+
+        function startGame() {  
+            myGamePiece = new component(80, 136, "red", 0, 0, 500, (window.innerHeight / 2));
             ground1 = new component(10, 200, "green", 300, 120);    
-            platform1 = new platform(426, 96, "blue", 500, (window.innerHeight/2));
+            platform1 = new platform(426, 96, "blue", 500, 1700);
+            platform2 = new platform(426, 96, "blue", 1300, 1400);
+            platform3 = new platform(426, 96, "blue", 500, 1200);
+            platform4 = new platform(426, 96, "blue", 3500, 600);
+            platform5 = new platform(426, 96, "blue", 1400, 900);
+            platform6 = new platform(426, 96, "blue", 2500, 700);
+            door1=new door(10, 200, "transparent", 3550, 300);  
             myGameArea.start();
         }   
 
@@ -123,6 +140,19 @@
             }
         }
 
+        function door(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.update = function () {
+                ctx = myGameArea.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                ctx.drawImage(doorimg, this.x, this.y)
+            }
+        }
+
 
 
         function updateGameArea() {
@@ -130,6 +160,13 @@
             myGamePiece.newPos();
             myGamePiece.update();
             platform1.update();
+            platform2.update();
+            platform3.update();
+            platform4.update();
+            platform5.update();
+            platform6.update();
+            door1.update();
+            
         }
     
         function moveup() {
@@ -155,7 +192,10 @@
         }
 
         function moveright() {
-        myGamePiece.speedX += 1;
+            if(myGamePiece.speedX<30){
+                myGamePiece.speedX += 10;
+            }
+        
         }
 
     document.addEventListener("keydown",(event)=>{
@@ -183,7 +223,7 @@
 
         document.addEventListener("keyup", (event) => {
             
-            if (event.key === "ArrowRight") { this.speedX = 0; }
+            if (event.key === "ArrowRight") { myGamePiece.speedX = 0; }
 
         })
 
@@ -194,7 +234,7 @@
             }
 
         })
-
+        startGame()
     </script>
     <iframe width="0" height="0" src="https://www.youtube.com/embed/qZtBIuEqdDE" title="Level 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <script>
