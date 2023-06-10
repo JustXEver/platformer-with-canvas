@@ -15,6 +15,37 @@
 </head>
 <body>
         <script>
+
+        function componentsOverlapping(component1, component2) {
+                // Get the positions and dimensions of the components
+                const component1Rect = {
+                    x: component1.x,
+                    y: component1.y,
+                    width: component1.width,
+                    height: component1.height,
+                };
+
+                const component2Rect = {
+                    x: component2.x,
+                    y: component2.y,
+                    width: component2.width,
+                    height: component2.height,
+                };
+
+                // Check for overlap
+                if (
+                    component1Rect.x < component2Rect.x + component2Rect.width &&
+                    component1Rect.x + component1Rect.width > component2Rect.x &&
+                    component1Rect.y < component2Rect.y + component2Rect.height &&
+                    component1Rect.y + component1Rect.height > component2Rect.y
+                ) {
+                    // The components are overlapping
+                    return true;
+                }
+
+                // The components are not overlapping
+                return false;
+            }
         
         var jumpcount = 0;
         var Bill = new Image();
@@ -51,6 +82,19 @@
             platform6 = new platform(426, 96, "blue", 2500, 700);
             door1=new door(10, 200, "transparent", 3550, 300);  
             myGameArea.start();
+
+            const platforms = [platform1, platform2, platform3, platform4, platform5, platform6];
+
+            setInterval(() => {
+                platforms.forEach(platform => {
+                    if(componentsOverlapping(platform, myGamePiece)) {
+                        myGamePiece.gravity = 0;
+                        myGamePiece.gravitySpeed = 0;
+                    } else {
+                        myGamePiece.gravity = 0.67;
+                    }
+                })
+            })
         }   
 
         var myGameArea = {
@@ -97,7 +141,7 @@
                 this.x += this.speedX;
                 this.y += this.speedY + this.gravitySpeed;
                 this.hitBottom();
-                this.hitPlatform();
+                // this.hitPlatform();
             }
             this.hitBottom = function () {
                 var rockbottom = myGameArea.canvas.height - this.height;
