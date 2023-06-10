@@ -54,6 +54,9 @@ body{
   .button3:hover{
     box-shadow: 0 50px 100px 0 rgba(0,0,0,0.24), 0 50px 100px 0 rgba(0,0,0,0.19);
   }
-
+img{
+  position: absolute;
+  left: 500px;
+}
 
   
