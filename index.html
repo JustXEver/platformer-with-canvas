@@ -188,7 +188,9 @@
         }
 
         function moveleft() {
-            myGamePiece.speedX -= 1;
+            if(myGamePiece.speedX<30){
+                myGamePiece.speedX -= 5;
+            }
         }
 
         function moveright() {
@@ -203,9 +205,7 @@
     })
 
     document.addEventListener("keydown",(event)=>{
-        
         if(event.key==="ArrowLeft"){moveleft();}
-
     })
 
     document.addEventListener("keydown",(event)=>{
